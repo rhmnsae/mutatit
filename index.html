@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MUTATIT — Platform Tools Berlangganan</title>
+  <link rel="preconnect" href="https://fonts.cdnfonts.com">
+  <link href="https://fonts.cdnfonts.com/css/cascadia-mono" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/svg+xml" href="image/mutatit2.svg">
+  <link rel="apple-touch-icon" href="image/mutatit2.svg">
+  <link rel="mask-icon" href="image/mutatit2.svg" color="#272727">
+  <meta name="theme-color" content="#272727">
+</head>
+
+<body>
+  <canvas id="gridCanvas"></canvas>
+  <div class="scanline"></div>
+  <div class="cur" id="cur"></div>
+  <div class="curf" id="curf"></div>
+  <div class="scroll-prog" id="scrollProg"></div>
+
+  <!-- LOADER -->
+  <div class="loader" id="loader">
+    <div class="ld-scan"></div>
+    <div class="ld-vl" style="left:20%;animation-delay:.02s"></div>
+    <div class="ld-vl" style="left:40%;animation-delay:.06s"></div>
+    <div class="ld-vl" style="left:60%;animation-delay:.1s"></div>
+    <div class="ld-vl" style="left:80%;animation-delay:.14s"></div>
+    <div class="ld-hl" style="top:25%;animation-delay:.18s"></div>
+    <div class="ld-hl" style="top:50%;animation-delay:.22s"></div>
+    <div class="ld-hl" style="top:75%;animation-delay:.26s"></div>
+    <div class="ld-center">
+      <div class="ld-num" id="ldNum">000</div>
+      <div class="ld-sub">MEMUAT PLATFORM</div>
+      <div class="ld-bar">
+        <div class="ld-fill" id="ldFill"></div>
+      </div>
+    </div>
+    <div class="ld-corner tl">MUTATIT.V1</div>
+    <div class="ld-corner tr">PLATFORM TOOLS</div>
+    <div class="ld-corner bl">2026</div>
+    <div class="ld-corner br">BERLANGGANAN</div>
+  </div>
+
+
+
+  <nav class="nav" id="nav">
+    <div class="nav-in">
+      <a href="#" class="nav-logo" id="navLogo">
+        <img src="image/mutatit.svg" alt="Logo" class="nav-logo-img">
+        <span>MUTATIT</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#tools" data-i18n="nav_tools">Tools</a></li>
+        <li><a href="#langganan" data-i18n="nav_sub">Langganan</a></li>
+        <li><a href="#request" data-i18n="nav_req">Request</a></li>
+        <li><a href="#cara" data-i18n="nav_how">Cara Kerja</a></li>
+      </ul>
+      <div class="nav-right">
+        <div class="lang-switcher">
+          <button class="lang-btn" data-lang="id" onclick="switchLanguage('id')">ID</button>
+          <button class="lang-btn" data-lang="en" onclick="switchLanguage('en')">EN</button>
+        </div>
+        <a href="#langganan" class="nav-cta" data-i18n="nav_cta">Mulai Berlangganan</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle Menu">
+          <span class="nt-line"></span>
+          <span class="nt-line"></span>
+          <span class="nt-line"></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mm-in">
+      <ul class="mm-links">
+        <li><a href="#tools" data-i18n="nav_tools">Tools</a></li>
+        <li><a href="#langganan" data-i18n="nav_sub">Langganan</a></li>
+        <li><a href="#request" data-i18n="nav_req">Request</a></li>
+        <li><a href="#cara" data-i18n="nav_how">Cara Kerja</a></li>
+      </ul>
+      <div class="mm-footer">
+        <div class="mm-head">
+          <div class="lang-switcher mm-lang">
+            <button class="lang-btn" data-lang="id" onclick="switchLanguage('id')">ID</button>
+            <button class="lang-btn" data-lang="en" onclick="switchLanguage('en')">EN</button>
+          </div>
+        </div>
+        <a href="#langganan" class="btn btn-d mm-cta" data-i18n="nav_cta">Mulai Berlangganan</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-body">
+      <div class="hero-l">
+        <div class="hero-bracket br-l">{</div>
+        <div class="hero-bracket br-r">}</div>
+        <div class="hero-tag"><span class="tag-dot"></span><span data-i18n="hero_tag">PLATFORM AKTIF — 2026</span></div>
+        <h1 class="hero-h1" id="heroH1">
+          <span class="hl"><span class="hl-i" id="hl1" data-i18n="hero_h1_1">TOOLS WEBSITE</span></span>
+          <span class="hl"><span class="hl-i" id="hl2" data-i18n="hero_h1_2">SIAP PAKAI</span></span>
+        </h1>
+        <p class="hero-desc" id="hDesc" data-i18n="hero_desc">Kami membangun tools berbasis website untuk kebutuhan bisnis. Akses semua tools
+          melalui berlangganan, atau ajukan request untuk tools dan fitur baru yang ingin Anda gunakan.</p>
+        <div class="hero-btns" id="hBtns">
+          <a href="#langganan" class="btn btn-d"><span class="btn-inner" data-i18n="hero_btn_pkg">Lihat Paket</span></a>
+          <a href="#request" class="btn btn-l"><span class="btn-inner" data-i18n="hero_btn_req">Ajukan Request</span></a>
+        </div>
+      </div>
+
+    </div>
+    <div class="stat-bar">
+      <div class="stat-col">
+        <div class="stat-n js-count" data-target="3">0</div>
+        <div class="stat-l" data-i18n="stat_tools">Tools Tersedia</div>
+      </div>
+      <div class="stat-col">
+        <div class="stat-n">DM</div>
+        <div class="stat-l" data-i18n="stat_dm">Konsultasi / Aktivasi</div>
+      </div>
+      <div class="stat-col">
+        <div class="stat-n">30K</div>
+        <div class="stat-l" data-i18n="stat_price">Mulai Dari / Tool</div>
+      </div>
+      <div class="stat-col">
+        <div class="stat-n">24/7</div>
+        <div class="stat-l" data-i18n="stat_help">Bantuan via WA</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- TOOLS -->
+  <section class="tools" id="tools">
+    <div class="s-in">
+      <div class="s-head">
+        <p class="s-tag" data-i18n="s_tag_tools">Koleksi Tools</p>
+        <h2 class="s-title rv" data-i18n="s_title_tools">TOOLS YANG TERSEDIA</h2>
+        <p class="s-desc rv" data-i18n="s_desc_tools">Pilih tools yang Anda butuhkan untuk efisiensi bisnis. Akses per-tool dengan harga
+          terjangkau dan aktivasi cepat melalui WhatsApp.</p>
+      </div>
+      <div class="tools-grid">
+        <div class="tool-card yel">
+          <div class="tc-fill"></div>
+          <div class="tc-glow"></div>
+          <div class="tc-num">01 — WEB SERVICES</div>
+          <h3 class="tc-name" data-i18n="tc_name_1">LANDINGKU</h3>
+          <p class="tc-desc" data-i18n="tc_desc_1">Jasa pembuatan website landing page profesional dengan desain modern, ringan, dan harga
+            yang sangat terjangkau untuk bisnis Anda.</p>
+          <span class="tc-tag" data-i18n="tc_tag_jasa">Jasa</span>
+        </div>
+        <div class="tool-card">
+          <div class="tc-fill"></div>
+          <div class="tc-glow"></div>
+          <div class="tc-num">02 — AI ANALYTICS</div>
+          <h3 class="tc-name" data-i18n="tc_name_2">SENTIMETER</h3>
+          <p class="tc-desc" data-i18n="tc_desc_2">Tools analisis sentimen di media sosial X secara otomatis dan mendalam menggunakan
+            teknologi kecerdasan buatan IndoBERT.</p>
+          <span class="tc-tag free" data-i18n="tc_tag_free">Gratis</span>
+        </div>
+        <div class="tool-card">
+          <div class="tc-fill"></div>
+          <div class="tc-glow"></div>
+          <div class="tc-num">03 — FINANCE & POS</div>
+          <h3 class="tc-name" data-i18n="tc_name_3">UANG MASUK</h3>
+          <p class="tc-desc" data-i18n="tc_desc_3">Tools laporan keuangan lengkap untuk UMKM terintegrasi sistem kasir (POS). Keunggulan
+            aplikasi website ini adalah bisa digunakan sepenuhnya secara offline dan sangat responsif di semua device.
+          </p>
+          <span class="tc-tag" data-i18n="tc_tag_paid">Berbayar</span>
+        </div>
+        <div class="tool-card inv">
+          <div class="tc-fill"></div>
+          <div class="tc-glow"></div>
+          <div class="tc-num">04 — COMING SOON</div>
+          <h3 class="tc-name" data-i18n="tc_name_4">DAN TERUS BERTAMBAH</h3>
+          <p class="tc-desc" data-i18n="tc_desc_4">Koleksi tools akan selalu ditambah seiring berjalannya waktu. Subscriber dapat dengan bebas
+            mengajukan ide rancangan pembuatan tools baru yang belum tersedia di platform melalui DM.</p>
+          <span class="tc-tag" data-i18n="tc_tag_soon">Segera Hadir</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- SUBSCRIPTION -->
+  <section class="sub" id="langganan">
+    <div class="s-in">
+      <div class="s-head">
+        <p class="s-tag" data-i18n="s_tag_sub">Paket Berlangganan</p>
+        <h2 class="s-title rv" data-i18n="s_title_sub">PILIH TOOLS ANDA</h2>
+        <p class="s-desc rv" data-i18n="s_desc_sub">Akses fleksibel sesuai kebutuhan. Pilih tool yang Anda inginkan, bayar sesuai yang
+          digunakan.
+          Aktivasi instan via DM.</p>
+      </div>
+      <div class="sub-grid">
+        <div class="sub-card">
+          <div class="sub-badge placeholder" data-i18n="sub_promo">PROMO</div>
+          <div class="sub-tier" data-i18n="sub_free_tier">Tools Gratis</div>
+          <div class="sub-price">Rp 0</div>
+          <div class="sub-period" data-i18n="sub_forever">selamanya</div>
+          <div class="sub-bar-wrap">
+            <div class="sub-bar" style="--pct:30%"></div>
+          </div>
+          <ul class="sub-feats">
+            <li class="sub-feat" data-i18n="sub_free_feat1">Akses tools berlabel gratis</li>
+            <li class="sub-feat" data-i18n="sub_free_feat2">Update reguler untuk fitur dasar</li>
+            <li class="sub-feat" data-i18n="sub_free_feat3">Akses langsung tanpa aktivasi WA</li>
+            <li class="sub-feat" data-i18n="sub_free_feat4">Gunakan kapan saja tanpa biaya</li>
+          </ul>
+          <a href="#tools" class="sub-btn sub-btn-out" data-i18n="sub_btn_now">Gunakan Sekarang</a>
+          <div class="sub-note" data-i18n="sub_note_free">Tanpa biaya berlangganan.</div>
+        </div>
+        <div class="sub-card">
+          <div class="sub-badge placeholder" data-i18n="sub_promo">PROMO</div>
+          <div class="sub-tier" data-i18n="sub_month_tier">Tools Bulanan</div>
+          <div class="sub-price">Rp 30K</div>
+          <div class="sub-period" data-i18n="sub_per_month">per bulan / tool</div>
+          <div class="sub-bar-wrap">
+            <div class="sub-bar" style="--pct:65%"></div>
+          </div>
+          <ul class="sub-feats">
+            <li class="sub-feat" data-i18n="sub_month_feat1">Akses penuh ke 1 tool pilihan</li>
+            <li class="sub-feat" data-i18n="sub_month_feat2">Update otomatis setiap fitur diperbarui</li>
+            <li class="sub-feat" data-i18n="sub_month_feat3">Bantuan teknis langsung via DM</li>
+            <li class="sub-feat" data-i18n="sub_month_feat4">Prioritas request fitur & tools baru</li>
+            <li class="sub-feat" data-i18n="sub_month_feat5">Aktivasi manual lewat WhatsApp</li>
+          </ul>
+          <a href="https://wa.me/#############" target="_blank" class="sub-btn sub-btn-out" data-i18n="sub_btn_wa">Pesan via WA</a>
+          <div class="sub-note" data-i18n="sub_note_month">Berlangganan per tool yang dibutuhkan.</div>
+        </div>
+        <div class="sub-card feat">
+          <div class="sub-badge" data-i18n="sub_best">Paling Hemat</div>
+          <div class="sub-tier" data-i18n="sub_year_tier">Tools Tahunan</div>
+          <div class="sub-price">Rp 300K</div>
+          <div class="sub-period" data-i18n="sub_per_year">per tahun / tool — hemat 2 bulan</div>
+          <div class="sub-bar-wrap">
+            <div class="sub-bar" style="--pct:92%"></div>
+          </div>
+          <ul class="sub-feats">
+            <li class="sub-feat" data-i18n="sub_year_feat1">Semua fitur di paket bulanan</li>
+            <li class="sub-feat" data-i18n="sub_year_feat2">Akses 1 tahun penuh tanpa gangguan</li>
+            <li class="sub-feat" data-i18n="sub_year_feat3">Hemat 2 bulan lebih murah</li>
+            <li class="sub-feat" data-i18n="sub_year_feat4">Pembayaran satu kali per tahun</li>
+          </ul>
+          <a href="https://wa.me/#############" target="_blank" class="sub-btn" data-i18n="sub_btn_wa">Pesan via WA</a>
+          <div class="sub-note" data-i18n="sub_note_year">Hemat 2 bulan dibanding bayar bulanan.</div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- REQUEST -->
+  <section class="req" id="request">
+    <div class="s-in">
+      <div class="s-head">
+        <p class="s-tag" data-i18n="s_tag_req">Request System</p>
+        <h2 class="s-title rv-l" data-i18n="s_title_req">MINTA FITUR <br> ATAU TOOLS BARU</h2>
+        <p class="s-desc rv" data-i18n="s_desc_req">Sistem request dibuat sederhana dan fleksibel. Anda dapat meminta penambahan fitur
+          eksklusif jika sudah berlangganan, atau mengajukan ide pembuatan tools baru bagi siapa saja secara langsung.
+        </p>
+      </div>
+      <div class="req-grid">
+        <div class="req-item">
+          <div class="req-n" data-i18n="req_n1_tag">01 — Feature Request</div>
+          <div class="req-title" data-i18n="req_title1">Khusus Untuk Subscriber</div>
+          <div class="req-text" data-i18n="req_text1">Eksklusif bagi Anda yang sudah berlangganan. Jika ada fitur tambahan yang Anda butuhkan
+            dari suatu tools, segera ajukan permintaan. Kami akan mengembangkan dan menambahkan fitur tersebut ke tools
+            Anda.</div>
+        </div>
+        <div class="req-item">
+          <div class="req-n" data-i18n="req_n2_tag">02 — Tool Request</div>
+          <div class="req-title" data-i18n="req_title2">Terbuka Untuk Siapa Saja</div>
+          <div class="req-text" data-i18n="req_text2">Belum menemukan tools yang Anda butuhkan di platform ini? Siapa saja bisa langsung
+            mengirimkan pesan via DM untuk mengajukan ide tools baru. Jika kami sepakati, tools tersebut akan kami
+            buatkan secara keseluruhan.</div>
+        </div>
+        <div class="req-item">
+          <div class="req-n" data-i18n="req_n3_tag">03 — Eksekusi Langsung</div>
+          <div class="req-title" data-i18n="req_title3">Evaluasi & Proses Cepat</div>
+          <div class="req-text" data-i18n="req_text3">Setiap ide dan permintaan yang masuk ke DM akan langsung ditinjau dan dievaluasi. Jika
+            relevan dan disetujui, kami akan memprioritaskan pengerjaannya lalu merilisnya secepat mungkin untuk dapat
+            Anda gunakan.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW -->
+  <section class="how" id="cara">
+    <div class="how-in">
+      <div class="how-head">
+        <p class="how-tag" data-i18n="how_tag">Cara Kerja</p>
+        <h2 class="how-title rv" data-i18n="how_title">BAGAIMANA INI BEKERJA</h2>
+        <p class="how-desc rv" data-i18n="how_desc">Dari berlangganan hingga menggunakan tools — prosesnya sederhana dan langsung.</p>
+      </div>
+      <div class="how-steps">
+        <div class="how-step">
+          <div class="hs-arrow"></div>
+          <div class="hs-n" data-n="1">01</div>
+          <div class="hs-title" data-i18n="hs_title1">PILIH TOOLS</div>
+          <div class="hs-text" data-i18n="hs_text1">Pilih tools yang Anda butuhkan dari koleksi kami. Masing-masing memiliki harga
+            terjangkau.</div>
+        </div>
+        <div class="how-step">
+          <div class="hs-arrow"></div>
+          <div class="hs-n" data-n="2">02</div>
+          <div class="hs-title" data-i18n="hs_title2">PESAN VIA DM</div>
+          <div class="hs-text" data-i18n="hs_text2">Hubungi kami melalui WhatsApp, DM Instagram, atau TikTok untuk memesan. Pembayaran dilakukan langsung.</div>
+        </div>
+        <div class="how-step">
+          <div class="hs-arrow"></div>
+          <div class="hs-n" data-n="3">03</div>
+          <div class="hs-title" data-i18n="hs_title3">AJUKAN REQUEST</div>
+          <div class="hs-text" data-i18n="hs_text3">Butuh fitur baru atau tools yang belum ada? Langsung saja ajukan request baru melalui DM WhatsApp kami sekarang juga.</div>
+        </div>
+        <div class="how-step">
+          <div class="hs-n" data-n="4">04</div>
+          <div class="hs-title" data-i18n="hs_title4">TOOLS BERKEMBANG</div>
+          <div class="hs-text" data-i18n="hs_text4">Setiap tools terus diperbarui. Request yang disetujui masuk ke roadmap dan dikerjakan
+            secara bertahap.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="cta-border"></div>
+    <div class="cta-grid">
+      <div class="cta-l">
+        <p class="cta-tag rv" data-i18n="cta_tag">BERGABUNG SEKARANG</p>
+        <h2 class="cta-h rv" data-i18n="cta_h">PILIH TOOLS SESUAI KEBUTUHAN</h2>
+        <p class="cta-sub rv" data-i18n="cta_sub">Dapatkan akses ke tools yang Anda butuhkan mulai dari Rp 30K. Hubungi kami via DM untuk
+          aktivasi instan.</p>
+        <div class="cta-btns rv">
+          <a href="https://wa.me/#############" target="_blank" class="btn btn-d"><span class="btn-inner" data-i18n="cta_btn_wa">Pesan via
+              WA</span></a>
+          <a href="#request" class="btn btn-l"><span class="btn-inner" data-i18n="cta_btn_req">Ajukan Request</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="ft">
+      <div class="ft-brand">
+        <div class="ft-logo">
+          <img src="image/mutatit.svg" alt="Logo" class="nav-logo-img">
+          <span>MUTATIT</span>
+        </div>
+        <p class="ft-desc" data-i18n="ft_desc">Platform tools berbasis website berlangganan. Dibangun, dirawat, dan dikembangkan secara profesional.
+        </p>
+        <div class="ft-addr" data-i18n="ft_addr">
+          Manggahang, Baleendah<br>
+          Kab. Bandung, Jawa Barat<br>
+          40375
+        </div>
+      </div>
+      <div class="ft-col">
+        <div class="ft-ct" data-i18n="ft_ct_platform">Platform</div>
+        <ul class="ft-links">
+          <li><a href="#tools" data-i18n="ft_link_tools">Koleksi Tools</a></li>
+          <li><a href="#langganan" data-i18n="ft_link_pkg">Paket Berlangganan</a></li>
+          <li><a href="#request" data-i18n="ft_link_req">Sistem Request</a></li>
+          <li><a href="#cara" data-i18n="ft_link_how">Cara Kerja</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <div class="ft-ct" data-i18n="ft_ct_sub">Berlangganan</div>
+        <ul class="ft-links">
+          <li><a href="#langganan" data-i18n="sub_free_tier">Tools Gratis</a></li>
+          <li><a href="#langganan" data-i18n="sub_month_tier">Tools Bulanan</a></li>
+          <li><a href="#langganan" data-i18n="sub_year_tier">Tools Tahunan</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <div class="ft-ct" data-i18n="ft_ct_contact">Hubungi Kami</div>
+        <ul class="ft-links">
+          <li><a href="https://wa.me/#############" target="_blank">WhatsApp</a></li>
+          <li><a href="https://instagram.com/mutatit" target="_blank">Instagram</a></li>
+          <li><a href="https://tiktok.com/@mutatit" target="_blank">TikTok</a></li>
+          <li><a href="mailto:hello@mutatit.com" data-i18n="ft_link_email">Email Kami</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <span class="ft-copy" data-i18n="ft_copy">&copy; 2026 MUTATIT. Semua hak dilindungi.</span>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/#############" target="_blank" class="wa-float">
+    <span class="wa-badge"></span>
+    <span data-i18n="wa_float">Hubungi Kami</span>
+  </a>
+
+  <script src="lang.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>

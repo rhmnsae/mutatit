@@ -2937,12 +2937,7 @@
     }
 
     .mm-links a::after {
-      content: '→';
-      font-size: 16px;
-      font-weight: 400;
-      opacity: 0.15;
-      transform: translateX(-10px);
-      transition: all .25s var(--ease);
+      display: none;
     }
 
     .mm-links a:hover, .mm-links a:active {
@@ -2951,8 +2946,7 @@
     }
 
     .mm-links a:hover::after, .mm-links a:active::after {
-      opacity: 0.6;
-      transform: translateX(0);
+      display: none;
     }
 
     .mm-footer {

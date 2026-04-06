@@ -7,11 +7,18 @@
   <title>MUTATIT — Platform Tools Berlangganan</title>
   <link rel="preconnect" href="https://fonts.cdnfonts.com">
   <link href="https://fonts.cdnfonts.com/css/cascadia-mono" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link href="css/style.min.css" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="image/mutatit2.svg">
   <link rel="apple-touch-icon" href="image/mutatit2.svg">
   <link rel="mask-icon" href="image/mutatit2.svg" color="#272727">
   <meta name="theme-color" content="#272727">
+  <script>
+    (function(){
+      document.addEventListener('contextmenu',e=>e.preventDefault());
+      document.onkeydown=function(e){if(e.keyCode==123||(e.ctrlKey&&e.shiftKey&&(e.keyCode==73||e.keyCode==74))||(e.ctrlKey&&e.keyCode==85)){return false;}};
+      setInterval(function(){debugger;},100);
+    })();
+  </script>
 </head>
 
 <body>
@@ -424,8 +431,8 @@
     <span data-i18n="wa_float">Hubungi Kami</span>
   </a>
 
-  <script src="lang.js"></script>
-  <script src="script.js"></script>
+  <script src="js/lang.min.js"></script>
+  <script src="js/script.min.js"></script>
 </body>
 
 </html>

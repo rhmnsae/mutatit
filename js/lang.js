@@ -126,7 +126,7 @@ const translations = {
     hero_btn_req: "Request a Tool",
     // Stats
     stat_tools: "Available Tools",
-    stat_dm: "Consultation / Activation",
+    stat_dm: "Consultation",
     stat_price: "Starting From / Tool",
     stat_help: "WA Support",
     // Tools Section
@@ -228,17 +228,17 @@ window.currentLang = localStorage.getItem('mutatit_lang') || 'id';
 function switchLanguage(lang) {
   window.currentLang = lang;
   localStorage.setItem('mutatit_lang', lang);
-  
+
   // Apply translations
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if (translations[lang][key]) {
       // For scramble/hover elements, we need to update the base text
       if (el.dataset.origTextBase !== undefined) {
-         el.dataset.origTextBase = translations[lang][key];
-         el.innerText = translations[lang][key];
+        el.dataset.origTextBase = translations[lang][key];
+        el.innerText = translations[lang][key];
       } else {
-         el.innerHTML = translations[lang][key];
+        el.innerHTML = translations[lang][key];
       }
     }
   });

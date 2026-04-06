@@ -92,7 +92,15 @@
 const cur = document.getElementById('cur'), curf = document.getElementById('curf');
 let mx = 0, my = 0, fx = 0, fy = 0;
 
+/* Disable custom cursor logic on non-precise pointer devices (touchscreens) */
+const isTouch = !window.matchMedia('(pointer: fine)').matches;
+if (isTouch) {
+  if (cur) cur.style.display = 'none';
+  if (curf) curf.style.display = 'none';
+}
+
 document.addEventListener('mousemove', e => {
+  if (isTouch) return;
   mx = e.clientX; my = e.clientY;
   cur.style.transform = `translate(${mx}px,${my}px)`;
 
@@ -124,6 +132,7 @@ document.querySelectorAll('a,button,.tool-card,.sub-card,.stat-col').forEach(el 
 
 /* click effect */
 document.addEventListener('click', e => {
+  if (isTouch) return;
   curf.classList.add('click');
   setTimeout(() => curf.classList.remove('click'), 200);
   spawnExplosion(e.clientX, e.clientY);

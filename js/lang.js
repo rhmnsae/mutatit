@@ -105,7 +105,6 @@ const translations = {
     ft_link_pkg: "Paket Berlangganan",
     ft_link_req: "Sistem Request",
     ft_link_how: "Cara Kerja",
-    ft_link_email: "Email Kami",
     ft_addr: "Manggahang, Baleendah<br>Kab. Bandung, Jawa Barat<br>40375",
     ft_copy: "&copy; 2026 MUTATIT. Semua hak dilindungi.",
     wa_float: "Hubungi Kami"
@@ -216,7 +215,6 @@ const translations = {
     ft_link_pkg: "Subscription Packages",
     ft_link_req: "Request System",
     ft_link_how: "How it Works",
-    ft_link_email: "Email Us",
     ft_addr: "Manggahang, Baleendah<br>Bandung Regency, West Java<br>40375",
     ft_copy: "&copy; 2026 MUTATIT. All rights reserved.",
     wa_float: "Contact Us"

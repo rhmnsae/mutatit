@@ -702,3 +702,29 @@ document.addEventListener('langChanged', () => {
   });
 })();
 
+/* ══════════════════════════════════════════════════════
+   CLEAN URL NAVIGATION (Remove '#' from address bar)
+══════════════════════════════════════════════════════ */
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', function (e) {
+    const targetId = this.getAttribute('href');
+    if (targetId === '#' || targetId === '') return;
+    
+    e.preventDefault();
+    const targetElement = document.querySelector(targetId);
+    if (targetElement) {
+      const nav = document.getElementById('nav');
+      const navHeight = nav ? nav.offsetHeight : 64;
+      const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight;
+      
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+      });
+      
+      // Update history without hash
+      window.history.pushState(null, null, window.location.pathname);
+    }
+  });
+});
+

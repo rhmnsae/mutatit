@@ -265,8 +265,15 @@
     }
 
     /* ─── SCROLLBAR ───────────────────────────────────────── */
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: var(--B) var(--W);
+    }
+
     ::-webkit-scrollbar {
       width: 14px;
+      height: 14px;
+      display: block;
     }
 
     ::-webkit-scrollbar-track {
@@ -276,7 +283,7 @@
 
     ::-webkit-scrollbar-thumb {
       background: var(--B);
-      border: 4px solid var(--W);
+      border: 3px solid var(--W);
       outline: var(--border);
       transition: background .2s;
     }
@@ -284,6 +291,7 @@
     ::-webkit-scrollbar-thumb:hover {
       background: #444;
     }
+
 
     /* ─── SCROLL PROGRESS ────────────────────────────────── */
     .scroll-prog {

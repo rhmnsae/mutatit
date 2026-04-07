@@ -1533,7 +1533,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      min-height: 300px;
+      min-height: 340px;
     }
 
     .tool-card:hover {
@@ -1686,7 +1686,8 @@
     /* inv variant */
     .tool-card.inv {
       background: var(--B);
-      color: var(--W)
+      color: var(--W);
+      box-shadow: 8px 8px 0 rgba(240, 249, 247, 0.1);
     }
 
     /* yellow variant */

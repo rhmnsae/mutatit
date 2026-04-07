@@ -237,7 +237,7 @@ function revealWords() {
                ? translations[lang][key] 
                : el.innerText.trim();
                
-  el.innerHTML = text.split(' ').map(w =>
+  el.innerHTML = text.split(/\s+/).map(w =>
     `<span style="display:inline-flex;opacity:0;transition:opacity .3s;white-space:pre-wrap">${w} </span>`
   ).join('');
   el.style.opacity = '1';

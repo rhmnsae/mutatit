@@ -1711,14 +1711,8 @@
       border-top: 3px solid var(--B);
     }
 
-    .sub-grid {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      padding: 0 40px 48px;
-    }
+    .sub-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:0 40px 48px;}
+    .sub-card:nth-child(4){grid-column:2;}
 
     .sub-card {
       padding: 40px 36px;
@@ -1941,6 +1935,12 @@
       opacity: 1;
       transform: none;
       transition-delay: .4s
+    }
+
+    .sub-card.in .sub-feat:nth-child(5) {
+      opacity: 1;
+      transform: none;
+      transition-delay: .5s
     }
 
     .sub-card.feat .sub-feat {
@@ -3048,9 +3048,9 @@
         grid-template-columns: repeat(2, 1fr);
         padding: 16px 28px 48px;
       }
-      /* Kartu ke-3 (Tahunan) full-width */
-      .sub-card:nth-child(3) {
-        grid-column: 1 / -1;
+      /* Kartu ke-3 & 4 reset full-width/centering */
+      .sub-card:nth-child(3), .sub-card:nth-child(4) {
+        grid-column: auto;
       }
 
       /* REQUEST */
@@ -3058,9 +3058,9 @@
         grid-template-columns: repeat(2, 1fr);
         padding: 16px 28px 48px;
       }
-      /* Req-item ke-3 full-width */
-      .req-item:nth-child(3) {
-        grid-column: 1 / -1;
+      /* Req-item ke-3 & 4 reset */
+      .req-item:nth-child(3), .req-item:nth-child(4) {
+        grid-column: auto;
       }
 
       /* HOW */
